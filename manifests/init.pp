@@ -26,21 +26,16 @@ class ngrok(
   }
 
   exec { 'download-ngrok':
-    command => "wget ${url}/${file}",
+    command => "/usr/bin/wget ${url}/${file}",
     cwd     => $directory,
     creates => "${directory}/${file}",
     require => [ Package["unzip"], File[$directory] ]
   }
   -> exec { 'extract-ngrok':
-    command => "unzip ${file}",
+    command => "/usr/bin/unzip ${file}",
     cwd     => $directory,
     creates => "${directory}/ngrok",
     require => [ Package["unzip"], Exec["download-ngrok"] ],
-  }
-  -> exec { 'remove-installer':
-    command => "rm ${file}",
-    cwd     => $directory,
-    require => Exec["extract-ngrok"],
   }
 
   case $::osfamily {
@@ -93,12 +88,12 @@ class ngrok(
   if $start {
     if $client {
       exec { "ngrok-client-start":
-        command  => "ngrok ${param_config} ${param_log} start ${client}",
+        command  => "/usr/local/bin/ngrok ${param_config} ${param_log} start ${client}",
         require  => File['install-ngrok'],
       }
     } else {
       exec { "ngrok-start":
-        command  => "ngrok ${param_sub} ${param_auth} ${param_proto} ${param_hostname} ${param_log} ${port}",
+        command  => "/usr/local/bin/ngrok ${param_sub} ${param_auth} ${param_proto} ${param_hostname} ${param_log} ${port}",
         require  => File['install-ngrok'],
       }
     }
