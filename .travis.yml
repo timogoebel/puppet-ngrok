@@ -1,0 +1,10 @@
+rvm: 1.8.7
+notifications:
+  email:
+    - mail@timogoebel.name
+env:
+  - PUPPET_VERSION=2.6.18
+  - PUPPET_VERSION=2.7.21
+  - PUPPET_VERSION=3.0.2
+  - PUPPET_VERSION=3.1.1
+  - PUPPET_VERSION=3.2.1
