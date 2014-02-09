@@ -1,3 +1,5 @@
+# Parameters for ngrok
+#
 class ngrok::params {
   $architecture = $::architecture ? {
     /^(arm)/ => 'arm',
