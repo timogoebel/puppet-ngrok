@@ -42,12 +42,12 @@ class ngrok(
 
   case $::osfamily {
     'Debian': {
-        file { 'install-ngrok':
-          ensure  => link,
-          path    => '/usr/local/bin/ngrok',
-          target  => "${directory}/ngrok",
-          require => Exec['extract-ngrok'],
-        }
+      file { 'install-ngrok':
+        ensure  => link,
+        path    => '/usr/local/bin/ngrok',
+        target  => "${directory}/ngrok",
+        require => Exec['extract-ngrok'],
+      }
     }
     default: {
       fail("Unsupported operating system: ${::operatingsystem}.")
